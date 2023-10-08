@@ -36,3 +36,17 @@ def crudCreate(request):
     if serializer.is_valid():
         serializer.save()
     return Response(serializer.data)
+
+@api_view(['POST'])
+def crudUpdate(request,pk):
+    crud = Crud.objects.get(id=pk)
+    serializer = CrudSerializers(instance=crud,data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+    return Response(serializer.data)
+
+@api_view(['DELETE'])
+def crudDelete(request,pk):
+    crud = Crud.objects.get(id=pk)
+    crud.delete()
+    return Response("The record is deleted successfuly.")
