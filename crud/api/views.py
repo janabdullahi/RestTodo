@@ -29,3 +29,10 @@ def crudDetail(request,pk):
     crud = Crud.objects.get(id=pk)
     serializer = CrudSerializers(crud, many=False)
     return Response(serializer.data)
+
+@api_view(['POST'])
+def crudCreate(request):
+    serializer = CrudSerializers(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+    return Response(serializer.data)
