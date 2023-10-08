@@ -23,3 +23,9 @@ def crudList(request):
     crud = Crud.objects.all()
     serializer = CrudSerializers(crud, many=True)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def crudDetail(request,pk):
+    crud = Crud.objects.get(id=pk)
+    serializer = CrudSerializers(crud, many=False)
+    return Response(serializer.data)
